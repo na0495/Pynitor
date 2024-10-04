@@ -1,4 +1,4 @@
-<img src="assets/logo.webp" alt="Pynitor Logo" style="max-width: 200px; max-height: 100px;" />
+<img src="assets/logo.webp" alt="Pynitor Logo" style="width: 150px; height: 150px;" />
 
 # Pynitor
 
