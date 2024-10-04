@@ -11,6 +11,8 @@ def send_discord_notification(webhook_url, message):
         if response.status_code != 204:
             print(f"Failed to send notification: {response.status_code}")
     except Exception as e:
+        print(f"Error sending Discord notification: {str(e)}")
+        logging.error(f"Failed to send Discord notification: {str(e)}", exc_info=True)
         print(f"Error sending notification: {e}")
 
 def check_health(application):
