@@ -1,3 +1,4 @@
+import logging
 import requests
 import time
 from app.config import APPLICATIONS, DEFAULT_WEBHOOK_URL, CHECK_INTERVAL
@@ -9,11 +10,9 @@ def send_discord_notification(webhook_url, message):
     try:
         response = requests.post(webhook_url, json=data)
         if response.status_code != 204:
-            print(f"Failed to send notification: {response.status_code}")
+            logging.error(f"Failed to send Discord notification: {response.text}")
     except Exception as e:
-        print(f"Error sending Discord notification: {str(e)}")
         logging.error(f"Failed to send Discord notification: {str(e)}", exc_info=True)
-        print(f"Error sending notification: {e}")
 
 def check_health(application):
     try:
