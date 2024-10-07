@@ -19,7 +19,14 @@ def check_health(application):
     try:
         response = requests.get(application['url'])
         if response.status_code != 200:
-            send_discord_notification(application.get("webhook_url", DEFAULT_WEBHOOK_URL), f"🚨 {application['name']} is unhealthy: Status code {response.status_code}")
+            send_discord_notification(
+                application.get("webhook_url", DEFAULT_WEBHOOK_URL), 
+                f"🚨 **{application['name']}** is unhealthy:\n"
+                f"**Status Code:** {response.status_code}\n"
+                f"**URL:** {application['url']}\n"
+                f"**Response Time:** {response.elapsed.total_seconds()} seconds\n"
+                f"**Response Content:** {response.text[:300]}...\n"
+            )
     except requests.exceptions.RequestException as e:
         send_discord_notification(application.get("webhook_url", DEFAULT_WEBHOOK_URL), f"🚨 {application['name']} health check failed: {str(e)}")
 
